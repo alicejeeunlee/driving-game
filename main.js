@@ -3,7 +3,8 @@ var data = {
   location: {
     x: 0,
     y: 0
-  }
+  },
+  start: false
 };
 
 var $img = document.querySelector('img');
@@ -22,7 +23,13 @@ function handleKeyDown(event) {
     data.direction = 'east';
     $img.className = data.direction;
   } else if (event.code === 'Space') {
-    intervalID = setInterval(moveRight, 16);
+    if (data.start === false) {
+      data.start = true;
+      intervalID = setInterval(moveRight, 16);
+    } else {
+      data.start = false;
+      intervalID = clearInterval(intervalID);
+    }
   }
 }
 
