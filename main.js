@@ -1,9 +1,13 @@
 var data = {
-  direction: 'east'
+  direction: 'east',
+  location: {
+    x: 0,
+    y: 0
+  }
 };
 
 var $img = document.querySelector('img');
-
+var intervalID;
 function handleKeyDown(event) {
   if (event.code === 'ArrowUp') {
     data.direction = 'north';
@@ -17,7 +21,15 @@ function handleKeyDown(event) {
   } else if (event.code === 'ArrowRight') {
     data.direction = 'east';
     $img.className = data.direction;
+  } else if (event.code === 'Space') {
+    intervalID = setInterval(moveRight, 16);
   }
 }
 
 document.addEventListener('keydown', handleKeyDown);
+
+function moveRight() {
+  $img.style.left = data.location.x++ + 'rem';
+}
+
+clearInterval(intervalID);
